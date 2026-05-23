@@ -1,27 +1,16 @@
 import type { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import { pool } from "../data/db";
+import { createUserService } from "../service/auth.createUserService";
 
 export const signup = async (req: Request, res: Response) => {
   try {
     const {name, email, password, role} = req.body;
-    
-    const hashPassword = await bcrypt.hash(password, 10);
-    
-    const query = `
-        INSERT INTO users (name, email, password, role)
-        VALUES ($1, $2, $3, $4)
-        RETURNING id, name, email, role, created_at, updated_at
-    `;
-    
-    const values = [name, email, hashPassword, role];
 
-    const result = await pool.query(query, values);
-
+    const result = await createUserService(name, email, password, role);
+    
     res.status(201).json({
       success: true,
       message: "User registered successfully",
-      data: result.rows[0],
+      data: result,
     });
   } catch (error) {
 
