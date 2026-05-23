@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { pool } from "../config/db";
+import { pool } from "../config/db.js";
 
 
 export const loginUserService = async (

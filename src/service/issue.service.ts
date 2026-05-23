@@ -1,4 +1,4 @@
-import { pool } from "../config/db";
+import { pool } from "../config/db.js";
 import type { JwtPayload } from "../utils";
 
 interface IIssueQueryParams {

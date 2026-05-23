@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { deleteIssueService } from "../service/issue.service";
+import { deleteIssueService } from "../service/issue.service.js";
 
 export const deleteIssue = async (req:Request, res: Response) => {
   try {

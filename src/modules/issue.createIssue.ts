@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createIssueService } from "../service/issue.service";
+import { createIssueService } from "../service/issue.service.js";
 
 export const createIssue = async ( req: Request, res: Response ) => {
   try {

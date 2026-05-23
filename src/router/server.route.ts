@@ -1,12 +1,12 @@
 import express from "express";
-import { signup } from "../controller/auth.signup";
-import { login } from "../controller/auth.login";
-import { auth } from "../middleware/auth.middle";
-import { createIssue } from "../modules/issue.createIssue";
-import { getAllIssues } from "../modules/issue.getAllIssues";
-import { getSingleIssue } from "../modules/issue.getSingleIssue";
-import { updateIssue } from "../modules/issue.updateIssue";
-import { deleteIssue } from "../modules/issue.deleteIssue";
+import { signup } from "../controller/auth.signup.js";
+import { login } from "../controller/auth.login.js";
+import { auth } from "../middleware/auth.middle.js";
+import { createIssue } from "../modules/issue.createIssue.js";
+import { getAllIssues } from "../modules/issue.getAllIssues.js";
+import { getSingleIssue } from "../modules/issue.getSingleIssue.js";
+import { updateIssue } from "../modules/issue.updateIssue.js";
+import { deleteIssue } from "../modules/issue.deleteIssue.js";
 
 const router = express.Router();
 

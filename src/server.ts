@@ -1,8 +1,7 @@
 import express, { type Application, type Request, type Response } from "express";
-import Router from "./router/server.route";
+import Router from "./router/server.route.js";
 import dotenv from "dotenv";
 dotenv.config();
-import { auth } from "./middleware/auth.middle";
 
 const app : Application = express();
 const port : number = Number(process.env.PORT);
