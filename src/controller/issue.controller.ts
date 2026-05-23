@@ -268,10 +268,7 @@ export const updateIssue = async ( req: Request, res: Response) => {
   }
 };
 
-export const deleteIssue = async (
-  req: Request,
-  res: Response
-) => {
+export const deleteIssue = async (req:Request, res: Response) => {
   try {
     const { id } = req.params;
 
