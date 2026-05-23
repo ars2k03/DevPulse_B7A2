@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { pool } from '../data/db';
+import { createIssueService } from "../service/issue.service";
 
 export const createIssue = async ( req: Request, res: Response ) => {
   try {
@@ -7,26 +7,12 @@ export const createIssue = async ( req: Request, res: Response ) => {
     
     const reporter_id = req.user.id;
 
-    const query = `
-        INSERT INTO issues
-        (
-          title,
-          description,
-          type,
-          reporter_id
-        )
-        VALUES ($1, $2, $3, $4)
-        RETURNING *
-    `; 
-
-    const values = [
+    const result = await createIssueService(
         title,
         description,
         type,
-        reporter_id,
-    ];
-
-    const result = await pool.query(query, values);
+        reporter_id
+      );
 
     res.status(201).json({
       success: true,

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { pool } from '../data/db';
+import { deleteIssueService } from "../service/issue.service";
 
 export const deleteIssue = async (req:Request, res: Response) => {
   try {
@@ -7,35 +7,7 @@ export const deleteIssue = async (req:Request, res: Response) => {
 
     const user = req.user;
 
-    if (user.role !== "maintainer") {
-      throw new Error(
-        "Only maintainer can delete issues"
-      );
-    }
-    
-    const findQuery = `
-      SELECT * FROM issues
-      WHERE id = $1
-    `;
-
-    const issueResult = await pool.query(
-      findQuery,
-      [id]
-    );
-
-    const issue = issueResult.rows[0];
-
-    if (!issue) {
-      throw new Error("Issue not found");
-    }
-
-
-    const deleteQuery = `
-      DELETE FROM issues
-      WHERE id = $1
-    `;
-
-    await pool.query(deleteQuery, [id]);
+    await deleteIssueService(id as string, user);
 
     res.status(200).json({
       success: true,
