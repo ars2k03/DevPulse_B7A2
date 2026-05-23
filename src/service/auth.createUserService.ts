@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { pool } from "../data/db";
 
 export const createUserService = async (

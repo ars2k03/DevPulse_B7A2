@@ -13,16 +13,9 @@ app.use('/api', Router);
 
 app.get('/', (req : Request, res : Response) => {
     res.status(200).json({
-        message : "PH Level - 2 Batch - 7",
+        success: true,
+        message : "DevPulse is Running successfully",
     })
-});
-
-app.get("/protected", auth, (req : Request, res : Response) => {
-  res.status(200).json({
-    success: true,
-    message: "Protected route accessed",
-    user: req.user,
-  });
 });
 
 app.listen(port, () => {

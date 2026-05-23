@@ -1,6 +1,20 @@
 import { pool } from "../data/db";
 import type { JwtPayload } from "../interfaces";
 
+interface IIssueQueryParams {
+  type?: "bug" | "feature_request";
+  status?: "open" | "in_progress" | "resolved";
+  sort?: "newest" | "oldest";
+}
+
+interface IIssueUpdatePayload {
+  title?: string;
+  description?: string;
+  type?: "bug" | "feature_request";
+  status?: "open" | "in_progress" | "resolved";
+}
+
+
 export const createIssueService = async (
   title: string,
   description: string,
@@ -35,9 +49,7 @@ export const createIssueService = async (
   return result.rows[0];
 };
 
-export const getAllIssuesService = async (
-  queryParams: any
-) => {
+export const getAllIssuesService = async ( queryParams: IIssueQueryParams) => {
 
   let query = `SELECT * FROM issues`;
 
@@ -160,8 +172,8 @@ export const getSingleIssueService = async (
 
 export const updateIssueService = async (
   id: string,
-  payload: any,
-  user: any
+  payload: IIssueUpdatePayload,
+  user: JwtPayload
 ) => {
 
   const findQuery = `
@@ -181,19 +193,12 @@ export const updateIssueService = async (
   }
 
   if (user.role !== "maintainer") {
-
-    if (
-      issue.reporter_id !== user.id
-    ) {
-      throw new Error(
-        "You are not allowed to update this issue"
-      );
+    if (issue.reporter_id !== user.id) {
+      throw new Error("You are not allowed to update this issue");
     }
 
     if (issue.status !== "open") {
-      throw new Error(
-        "Only open issues can be updated"
-      );
+      throw new Error("Only open issues can be updated");
     }
   }
 
@@ -227,35 +232,35 @@ export const deleteIssueService = async (
   id: string,
   user: JwtPayload
 ) => {
-
-  if (user.role !== "maintainer") {
-    throw new Error(
-      "Only maintainer can delete issues"
-    );
-  }
-
-  const findQuery = `
+    const findQuery = `
     SELECT * FROM issues
     WHERE id = $1
-  `;
+    `;
 
-  const issueResult = await pool.query(
-    findQuery,
-    [id]
-  );
+    const issueResult = await pool.query(
+      findQuery,
+      [id]
+    );
 
-  const issue = issueResult.rows[0];
+    const issue = issueResult.rows[0];
 
-  if (!issue) {
-    throw new Error("Issue not found");
-  }
+    if (!issue) {
+      throw new Error("Issue not found");
+    }
 
-  const deleteQuery = `
-    DELETE FROM issues
-    WHERE id = $1
-  `;
 
-  await pool.query(deleteQuery, [id]);
+    if (user.role !== "maintainer") {
+      throw new Error(
+        "Only maintainer can delete issues"
+      );
+    }
 
-  return;
+    const deleteQuery = `
+      DELETE FROM issues
+      WHERE id = $1
+    `;
+
+    await pool.query(deleteQuery, [id]);
+
+    return;
 };

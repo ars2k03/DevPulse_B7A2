@@ -13,13 +13,31 @@ export const deleteIssue = async (req:Request, res: Response) => {
       success: true,
       message: "Issue deleted successfully",
     });
-
   } catch (error) {
 
-    res.status(403).json({
+    const err = error as Error;
+
+    if (err.message === "Issue not found") {
+      return res.status(404).json({
+        success: false,
+        message: "Issue not found",
+        errors: err.message,
+      });
+    }
+
+    if (err.message === "Only maintainer can delete issues") {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden access",
+        errors: err.message,
+      });
+    }
+
+    res.status(500).json({
       success: false,
-      message: (error as Error).message,
+      message: "Failed to delete issue",
+      errors: err.message,
     });
 
-  }
+}
 };

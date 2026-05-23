@@ -17,7 +17,8 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(401).json({
       success: false,
-      message: (error as Error).message,
+      message: "Login failed",
+      errors: (error as Error).message,
     });
     
   }

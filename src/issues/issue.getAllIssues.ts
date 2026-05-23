@@ -9,6 +9,7 @@ export const getAllIssues = async (req: Request, res: Response) => {
     
     res.status(200).json({
       success: true,
+      message : "Issues retrived successfully",
       data: result,
     });
 
@@ -17,6 +18,7 @@ export const getAllIssues = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch issues",
+      errors: (error as Error).message,
     });
 
   }

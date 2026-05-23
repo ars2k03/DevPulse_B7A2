@@ -10,6 +10,7 @@ export const auth = (req : Request, res : Response, next : NextFunction) => {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized access",
+                errors: "JWT token is missing",
             });
         }
 
@@ -19,11 +20,12 @@ export const auth = (req : Request, res : Response, next : NextFunction) => {
         
         next();
 
-    }catch(e){
+    }catch(error){
 
         return res.status(401).json({
             success: false,
             message: "Invalid token",
+            errors: (error as Error).message,
         });
 
     }
