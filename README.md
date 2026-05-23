@@ -7,9 +7,7 @@
 
 # 🌐 Live Links
 
-- 🔗 Live API: https://your-live-url.com
-- 📦 GitHub Repository: https://github.com/yourusername/devpulse-api
-- 🎥 Interview Video: https://your-video-link.com
+- 🔗 Live API: https://devpulse-b7a2.onrender.com/
 
 ---
 
