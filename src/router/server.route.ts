@@ -2,11 +2,11 @@ import express from "express";
 import { signup } from "../controller/auth.signup";
 import { login } from "../controller/auth.login";
 import { auth } from "../middleware/auth.middle";
-import { createIssue } from "../issues/issue.createIssue";
-import { getAllIssues } from "../issues/issue.getAllIssues";
-import { getSingleIssue } from "../issues/issue.getSingleIssue";
-import { updateIssue } from "../issues/issue.updateIssue";
-import { deleteIssue } from "../issues/issue.deleteIssue";
+import { createIssue } from "../modules/issue.createIssue";
+import { getAllIssues } from "../modules/issue.getAllIssues";
+import { getSingleIssue } from "../modules/issue.getSingleIssue";
+import { updateIssue } from "../modules/issue.updateIssue";
+import { deleteIssue } from "../modules/issue.deleteIssue";
 
 const router = express.Router();
 

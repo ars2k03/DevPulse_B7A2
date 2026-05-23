@@ -1,5 +1,5 @@
-import { pool } from "../data/db";
-import type { JwtPayload } from "../interfaces";
+import { pool } from "../config/db";
+import type { JwtPayload } from "../utils";
 
 interface IIssueQueryParams {
   type?: "bug" | "feature_request";

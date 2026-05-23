@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { pool } from "../data/db";
+import { pool } from "../config/db";
 
 export const createUserService = async (
   name: string,
