@@ -55,8 +55,6 @@
 | bcrypt | Password Hashing |
 | dotenv | Environment Variables |
 | cors | Cross-Origin Resource Sharing |
-| nodemon | Development Server |
-
 
 ---
 
